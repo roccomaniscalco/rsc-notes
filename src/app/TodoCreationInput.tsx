@@ -1,11 +1,13 @@
-"use client";
-
 import { createTodo } from "@/zactions";
 import { Loader2Icon, PlusIcon } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useZact } from "zact/client";
 
-const CreateCreationInput = () => {
+type TodoCreationInputProps = {
+  addOptimisticTodo: (action: string) => void;
+};
+
+const TodoCreationInput = (props: TodoCreationInputProps) => {
   const { mutate, isLoading } = useZact(createTodo);
   const [content, setContent] = useState("");
 
@@ -15,8 +17,11 @@ const CreateCreationInput = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (content) mutate({ content });
-    setContent("");
+    if (content) {
+      mutate({ content });
+      props.addOptimisticTodo(content);
+      setContent("");
+    }
   };
 
   return (
@@ -44,4 +49,4 @@ const CreateCreationInput = () => {
   );
 };
 
-export default CreateCreationInput;
+export default TodoCreationInput;

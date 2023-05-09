@@ -1,0 +1,11 @@
+{
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#d484dd",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#c65cd2",
+        "statusBarItem.remoteBackground": "#d484dd",
+        "statusBarItem.remoteForeground": "#15202b"
+    },
+    "peacock.color": "#d484dd"
+}

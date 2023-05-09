@@ -1,7 +1,6 @@
-"use client";
-
 import { updateTodoCompletion } from "@/zactions";
-import { CheckIcon, CheckSquareIcon, SquareIcon } from "lucide-react";
+import { CheckIcon } from "lucide-react";
+import { experimental_useOptimistic as useOptimistic } from "react";
 import { useZact } from "zact/client";
 
 type TodoCompletionToggleProps = {
@@ -10,9 +9,14 @@ type TodoCompletionToggleProps = {
 };
 const TodoCompletionToggle = (props: TodoCompletionToggleProps) => {
   const { mutate, isLoading } = useZact(updateTodoCompletion);
+  const [optimisticIsCompleted, toggleOptimisticIsCompleted] = useOptimistic(
+    props.isCompleted,
+    (prevIsCompleted) => !prevIsCompleted,
+  );
 
   const handleClick = () => {
-    mutate({ isCompleted: !props.isCompleted, id: props.id });
+    toggleOptimisticIsCompleted(undefined);
+    mutate({ isCompleted: !optimisticIsCompleted, id: props.id });
   };
 
   return (
@@ -23,7 +27,7 @@ const TodoCompletionToggle = (props: TodoCompletionToggleProps) => {
     >
       <CheckIcon
         className={`h-5 w-5 ${
-          props.isCompleted ? "text-pink-400" : "text-slate-600"
+          optimisticIsCompleted ? "text-pink-400" : "text-slate-600"
         }`}
       />
     </button>
