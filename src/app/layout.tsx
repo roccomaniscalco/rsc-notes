@@ -15,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" style={{ colorScheme: "dark" }}>
-      <body className={`${inter.className} bg-slate-950 text-slate-300`}>{children}</body>
+      <body className={`${inter.className} bg-slate-950 text-slate-300`}>
+        {children}
+      </body>
     </html>
   );
 }
