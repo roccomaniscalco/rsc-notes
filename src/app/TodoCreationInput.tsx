@@ -9,6 +9,7 @@ type TodoCreationInputProps = {
 
 const TodoCreationInput = (props: TodoCreationInputProps) => {
   const { mutate, isLoading } = useZact(createTodo);
+  
   const [content, setContent] = useState("");
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
@@ -31,13 +32,11 @@ const TodoCreationInput = (props: TodoCreationInputProps) => {
         placeholder="Add todo..."
         onChange={handleChange}
         value={content}
-        disabled={isLoading}
         className="flex-1 rounded-md border border-slate-800 bg-slate-900 px-3 text-xl opacity-80 outline-none ring-pink-400 ring-offset-4 ring-offset-slate-950 transition-opacity placeholder:text-slate-500 hover:opacity-100 focus-visible:ring-2"
       />
       <button
         type="submit"
         className="rounded-md border border-slate-800 bg-slate-900 px-3 py-3 opacity-80 outline-none ring-pink-400 ring-offset-4 ring-offset-slate-950 transition-opacity hover:opacity-100 focus-visible:ring-2"
-        disabled={isLoading}
       >
         {isLoading ? (
           <Loader2Icon className="h-5 w-5 animate-spin" />
